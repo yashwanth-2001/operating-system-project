@@ -1,0 +1,40 @@
+#include<iostream>
+#include<pthread.h>
+#include<stdio.h>
+using namespace std;
+void* fibonacci(void*);
+long n;
+void* fibonacci(void* arg)
+{
+int c, num1 = 0, num2 = 1, num3;
+for ( c = 0 ; c <n; c++ )
+{
+if ( c == 1 )
+num3 = c;
+else if ( c== 0 )
+num3 =c;
+else
+{
+num3 = num1 + num2;
+num1 = num2;
+num2 = num3;
+}
+cout << num3 << endl;
+}
+}
+int main()
+{
+pthread_t t;
+cout << "Enter the number of terms of Fibonacci series you want to display" << endl;
+cin >> n;
+if ( n < 1 )
+{
+cout<<" enter valid number of input " << endl;
+}
+else
+{
+cout << "first " << n << " terms of Fibonacci series are :- " << endl;
+pthread_create (&t , NULL , fibonacci,(void*)&n);
+return 0;
+}
+}
